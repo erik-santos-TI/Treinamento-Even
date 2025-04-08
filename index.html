@@ -1,86 +1,147 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Central de Treinamentos da Even.">
-    <title>Central de Treinamentos - Even</title>
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #E0F7FA;
-            color: #004D40;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plataforma EVEN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        fontFamily: {
+          sans: ['Inter', 'sans-serif'],
+        },
+        extend: {
+          colors: {
+            primary: '#00635D',
+            evenmore: '#009B94',
+            evenvendas: '#7960A9',
+          },
         }
-
-        .container {
-            max-width: 600px;
-            margin: 20px;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            background-color: #FFFFFF;
-            text-align: center;
-            box-sizing: border-box;
-        }
-
-        h1 {
-            color: #00796B;
-            font-size: 32px;
-            margin-bottom: 30px;
-        }
-
-        .training-link-container {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #004D40;
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: inline-block;
-            width: 90%;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .training-link-container:hover {
-            transform: scale(1.05);
-            background-color: #00796B;
-        }
-
-        .training-link-container a {
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 18px;
-            background-color: #00796B;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .training-link-container a:hover {
-            background-color: #004D40;
-        }
-    </style>
+      }
+    }
+  </script>
 </head>
-<body>
-    <div class="container">
-        <h1>Central de Treinamentos - Even</h1>
-
-        <!-- Caixa do link de Treinamentos -->
-        <div class="training-link-container">
-            <h2>Treinamentos</h2>
-            <p>Para acessar os treinamentos da Even, clique no link abaixo:</p>
-            <a href="https://evenbr-my.sharepoint.com/:f:/g/personal/rnetto_even_com_br/ElfwG_h4zchFmFfFhvPhUO8BbTbcLZeIHwRqBfH3zRIFUQ?e=epLGME" target="_blank" rel="noopener noreferrer">Acessar Treinamentos</a>
-        </div>
+<body class="bg-gradient-to-b from-white to-gray-100 min-h-screen flex flex-col items-center justify-center p-4 font-sans">
+  <div id="selecao-empresa" class="bg-white shadow-2xl rounded-2xl p-8 max-w-md w-full animate-fade-in">
+    <div class="flex justify-center mb-6">
+      <h1 class="text-5xl font-extrabold text-primary tracking-wide drop-shadow-sm">EVEN</h1>
     </div>
+    <h1 class="text-2xl font-extrabold text-primary text-center mb-4">Prezado corretor associado,<br>bem-vindo à plataforma EVEN</h1>
+    <p class="text-center text-sm text-gray-600 mb-6">Escolha a empresa à qual você pertence:</p>
+    <div class="flex flex-col gap-4">
+      <button onclick="selecionarEmpresa('evenmore')" class="w-full bg-evenmore text-white font-semibold py-2 rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105">EvenMore</button>
+      <button onclick="selecionarEmpresa('evenvendas')" class="w-full bg-evenvendas text-white font-semibold py-2 rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105">EvenVendas</button>
+    </div>
+  </div>
+
+  <div id="plataforma" class="hidden bg-white shadow-2xl rounded-2xl p-8 max-w-md w-full animate-fade-in">
+    <div class="flex justify-between items-center mb-6">
+      <h1 id="tituloEmpresa" class="text-5xl font-extrabold tracking-wide drop-shadow-sm">EVEN</h1>
+      <button onclick="voltarInicio()" title="Voltar" class="text-sm text-primary underline hover:text-primary/80 transition">← Voltar</button>
+    </div>
+    <h1 id="subtituloEmpresa" class="text-2xl font-extrabold text-center mb-4">Bem-vindo à Plataforma</h1>
+    <label class="block text-sm font-semibold text-gray-700 mb-2">Digite seu apelido:</label>
+    <input id="apelido" type="text" placeholder="Ex: Apelido" class="w-full p-2 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-primary" onkeydown="if(event.key==='Enter') gerarInfo()">
+    <button onclick="gerarInfo()" class="w-full bg-primary text-white font-semibold py-2 rounded-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 focus:ring-4 focus:ring-primary">Gerar Informações</button>
+
+    <div id="resultado" class="mt-6 hidden animate-fade-in">
+      <h2 class="text-xl font-bold text-primary mb-2">Acessos Gerados:</h2>
+      <ul id="linksAcesso" class="space-y-3"></ul>
+      <div id="avisoTTI" class="mt-4 bg-red-100 text-red-800 border border-red-300 rounded-lg p-3 text-sm font-semibold flex items-center gap-2 animate-pulse hidden">
+        ⚠ Corretores TTI não possuem acesso ao e-mail corporativo.
+      </div>
+      <div class="mt-2 bg-yellow-100 text-yellow-800 border border-yellow-300 rounded-lg p-3 text-sm font-semibold flex items-center gap-2 animate-fade-in">
+        ℹ️ O e-mail e a senha informados são válidos para todas as plataformas acima.
+      </div>
+      <div class="mt-2 bg-orange-100 text-orange-800 border border-orange-300 rounded-lg p-3 text-sm font-semibold flex items-center gap-2 animate-fade-in">
+        ⚠ Corretores com perfil TTI não possuem acesso ao e-mail corporativo.
+      </div>
+
+      <!-- Bloco de Treinamento -->
+      <div class="mt-6 bg-[#004D40] text-white rounded-xl p-5 shadow-lg animate-fade-in">
+        <h2 class="text-xl font-bold mb-2">Central de Treinamentos - Even</h2>
+        <p class="text-sm mb-4">Para acessar os treinamentos da Even, clique no botão abaixo:</p>
+        <a href="https://evenbr-my.sharepoint.com/:f:/g/personal/rnetto_even_com_br/ElfwG_h4zchFmFfFhvPhUO8BbTbcLZeIHwRqBfH3zRIFUQ?e=4GliLv" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#00796B] hover:bg-[#004D40] transition px-4 py-2 rounded-md font-semibold">Acessar Treinamentos</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 text-center animate-fade-in">
+    <p class="text-xs text-gray-400">Desenvolvido por TI · Plataforma Interna EVEN</p>
+  </div>
+
+  <style>
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+  <script>
+    let empresaSelecionada = '';
+
+    function selecionarEmpresa(empresa) {
+      empresaSelecionada = empresa;
+      document.getElementById('selecao-empresa').classList.add('hidden');
+      document.getElementById('plataforma').classList.remove('hidden');
+      const titulo = document.getElementById('tituloEmpresa');
+      const subtitulo = document.getElementById('subtituloEmpresa');
+      titulo.classList.remove('text-evenmore', 'text-evenvendas');
+      if (empresa === 'evenmore') {
+        titulo.textContent = 'EvenMore';
+        titulo.classList.add('text-evenmore');
+        subtitulo.textContent = 'Bem-vindo à Plataforma EvenMore';
+      } else {
+        titulo.textContent = 'EvenVendas';
+        titulo.classList.add('text-evenvendas');
+        subtitulo.textContent = 'Bem-vindo à Plataforma EvenVendas';
+      }
+    }
+
+    function voltarInicio() {
+      document.getElementById('plataforma').classList.add('hidden');
+      document.getElementById('selecao-empresa').classList.remove('hidden');
+      document.getElementById('resultado').classList.add('hidden');
+      document.getElementById('apelido').value = '';
+      document.getElementById('avisoTTI').classList.add('hidden');
+    }
+
+    function gerarInfo() {
+      const apelido = document.getElementById('apelido').value.trim().toLowerCase();
+      if (!apelido) return;
+
+      const isTTI = apelido.includes('tti');
+      const email = `${apelido}@${empresaSelecionada === 'evenmore' ? 'emci' : 'evci'}.com.br`;
+      const links = empresaSelecionada === 'evenmore'
+        ? [
+            { nome: 'Webmail', url: 'http://webmail.emci.com.br' },
+            { nome: 'Hypnobox', url: 'https://evenmore.hypnobox.com.br' },
+            { nome: 'Portal do Corretor', url: 'http://corretor.even.com.br' },
+            { nome: 'SIGAV', url: 'https://sigav.even.com.br' },
+          ]
+        : [
+            { nome: 'Webmail', url: 'http://webmail.evci.com.br' },
+            { nome: 'Hypnobox', url: 'https://even.hypnobox.com.br' },
+            { nome: 'Portal do Corretor', url: 'http://corretor.even.com.br' },
+            { nome: 'SIGAV', url: 'https://sigav.even.com.br' },
+          ];
+
+      const lista = document.getElementById('linksAcesso');
+      lista.innerHTML = `<li><span class="font-semibold text-gray-700">E-mail:</span> <span class="text-gray-800">${email}</span></li>
+        <li><span class="font-semibold text-gray-700">Senha:</span> <span class="text-gray-800">Even@2025</span></li>`;
+      links.forEach(link => {
+        lista.innerHTML += `<li><a href="${link.url}" target="_blank" class="flex items-center gap-2 text-blue-600 hover:underline hover:pl-1 transition-all duration-200">${link.nome}</a></li>`;
+      });
+
+      document.getElementById('resultado').classList.remove('hidden');
+      document.getElementById('avisoTTI').classList.toggle('hidden', !isTTI);
+    }
+  </script>
 </body>
 </html>
+
