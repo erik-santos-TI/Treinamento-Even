@@ -31,8 +31,8 @@
     <h1 class="text-2xl font-extrabold text-primary text-center mb-4">Prezado corretor associado,<br>bem-vindo à plataforma EVEN</h1>
     <p class="text-center text-sm text-gray-600 mb-6">Escolha a empresa à qual você pertence:</p>
     <div class="flex flex-col gap-4">
-      <button onclick="selecionarEmpresa('evenmore')" class="w-full bg-evenmore text-white font-semibold py-2 rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105">EvenMore</button>
-      <button onclick="selecionarEmpresa('evenvendas')" class="w-full bg-evenvendas text-white font-semibold py-2 rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105">EvenVendas</button>
+      <button onclick="selecionarEmpresa('evenmore')" class="w-full bg-evenmore text-white font-semibold py-2 rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105">Even more</button>
+      <button onclick="selecionarEmpresa('evenvendas')" class="w-full bg-evenvendas text-white font-semibold py-2 rounded-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105">Even vendas</button>
     </div>
   </div>
 
@@ -50,13 +50,13 @@
       <h2 class="text-xl font-bold text-primary mb-2">Acessos Gerados:</h2>
       <ul id="linksAcesso" class="space-y-3"></ul>
       <div id="avisoTTI" class="mt-4 bg-red-100 text-red-800 border border-red-300 rounded-lg p-3 text-sm font-semibold flex items-center gap-2 animate-pulse hidden">
-        ⚠ Corretores TTI não possuem acesso ao e-mail corporativo.
+        ⚠ Corretores com perfil TTI (corretor associado) não possuem acesso ao e-mail corporativo.
       </div>
       <div class="mt-2 bg-yellow-100 text-yellow-800 border border-yellow-300 rounded-lg p-3 text-sm font-semibold flex items-center gap-2 animate-fade-in">
-        ℹ️ O e-mail e a senha informados são válidos para todas as plataformas acima.
+        ℹ️ O e-mail e a senha informados são válidos para todas as plataformas acima. (É necessário fazer a alteração de todas as senhas das plataformas)
       </div>
-      <div class="mt-2 bg-orange-100 text-orange-800 border border-orange-300 rounded-lg p-3 text-sm font-semibold flex items-center gap-2 animate-fade-in">
-        ⚠ Corretores com perfil TTI não possuem acesso ao e-mail corporativo.
+      <div class="mt-2 bg-red-100 text-red-800 border border-red-300 rounded-lg p-3 text-sm font-semibold flex items-center gap-2 animate-fade-in">
+        ⚠ Corretores associados com perfil TTI não possuem acesso ao e-mail corporativo.
       </div>
 
       <!-- Bloco de Treinamento -->
@@ -93,13 +93,13 @@
       const subtitulo = document.getElementById('subtituloEmpresa');
       titulo.classList.remove('text-evenmore', 'text-evenvendas');
       if (empresa === 'evenmore') {
-        titulo.textContent = 'EvenMore';
+        titulo.textContent = 'Even more';
         titulo.classList.add('text-evenmore');
-        subtitulo.textContent = 'Bem-vindo à Plataforma EvenMore';
+        subtitulo.textContent = 'Bem-vindo à Plataforma Even more';
       } else {
-        titulo.textContent = 'EvenVendas';
+        titulo.textContent = 'Even vendas';
         titulo.classList.add('text-evenvendas');
-        subtitulo.textContent = 'Bem-vindo à Plataforma EvenVendas';
+        subtitulo.textContent = 'Bem-vindo à Plataforma Even vendas';
       }
     }
 
@@ -112,7 +112,8 @@
     }
 
     function gerarInfo() {
-      const apelido = document.getElementById('apelido').value.trim().toLowerCase();
+      const apelidoInput = document.getElementById('apelido');
+      const apelido = apelidoInput.value.trim().toLowerCase();
       if (!apelido) return;
 
       const isTTI = apelido.includes('tti');
@@ -140,8 +141,13 @@
 
       document.getElementById('resultado').classList.remove('hidden');
       document.getElementById('avisoTTI').classList.toggle('hidden', !isTTI);
+
+      // Auto selecionar e copiar apelido ao clicar
+      apelidoInput.addEventListener('click', function () {
+        apelidoInput.select();
+        document.execCommand('copy');
+      });
     }
   </script>
 </body>
 </html>
-
