@@ -38,6 +38,11 @@ Digite seu apelido.
 
 Veja as informações geradas automaticamente.
 
+previa em imagem:
+
+![image](https://github.com/user-attachments/assets/43439b00-b24f-4454-b7a9-109b41c262b4)
+
+
 
 👨‍💻 Desenvolvido por
 Erik Santos – TI Even
