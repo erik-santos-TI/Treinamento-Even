@@ -29,7 +29,7 @@ Clone o repositório:
 bash
 Copiar
 Editar
-git clone https://github.com/seu-usuario/plataforma-even.git
+git clone ( https://erik-santos-ti.github.io/Plataforma_Imob/ )
 Abra o arquivo index.html no seu navegador.
 
 Escolha a empresa.
@@ -38,20 +38,7 @@ Digite seu apelido.
 
 Veja as informações geradas automaticamente.
 
-📁 Estrutura
-bash
-Copiar
-Editar
-.
-├── index.html              # Página principal com todo o funcionamento
-├── README.md               # Este arquivo
-└── /assets (opcional)     # Logos ou imagens utilizadas
-📌 Observações
-Corretores com apelido contendo "tti" receberão alertas indicando que não têm acesso ao e-mail corporativo.
 
-A plataforma é de uso interno, desenvolvida pela equipe de TI da EVEN.
-
-📷 Prévia (sugestão de colocar um screenshot aqui)
 👨‍💻 Desenvolvido por
 Erik Santos – TI Even
 GitHub
