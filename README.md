@@ -40,7 +40,8 @@ Veja as informações geradas automaticamente.
 
 previa em imagem:
 
-![image](https://github.com/user-attachments/assets/43439b00-b24f-4454-b7a9-109b41c262b4)
+![image](https://github.com/user-attachments/assets/6c80d0ac-f465-448e-b631-b62cd4c75e98)
+
 
 
 
