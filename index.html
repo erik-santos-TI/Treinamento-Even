@@ -80,6 +80,31 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Media Queries para telas pequenas */
+    @media (max-width: 768px) {
+      .text-5xl {
+        font-size: 2.5rem; /* Reduzir o tamanho do título */
+      }
+      .text-2xl {
+        font-size: 1.5rem; /* Reduzir o subtítulo */
+      }
+      .p-8 {
+        padding: 2rem; /* Ajustar padding */
+      }
+      .gap-4 {
+        gap: 2rem; /* Reduzir espaçamento entre os botões */
+      }
+      .w-full {
+        width: 100%; /* Garantir que todos os elementos usem 100% da largura */
+      }
+      .text-sm {
+        font-size: 0.875rem; /* Ajustar tamanho de fontes menores */
+      }
+      .max-w-md {
+        max-width: 100%; /* Garantir que a largura máxima seja 100% em telas pequenas */
+      }
+    }
   </style>
 
   <script>
@@ -118,6 +143,8 @@
 
       const isTTI = apelido.includes('tti');
       const email = `${apelido}@${empresaSelecionada === 'evenmore' ? 'emci' : 'evci'}.com.br`;
+
+
       const links = empresaSelecionada === 'evenmore'
         ? [
             { nome: 'Webmail', url: 'http://webmail.emci.com.br' },
@@ -151,3 +178,4 @@
   </script>
 </body>
 </html>
+
